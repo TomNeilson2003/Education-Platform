@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cosmo-algorithms.css">
+    <title>Cosmo's Algorithm Adventure - Level 2</title>
+</head>
+<body>
+    <!-- Cosmo Character with Speech Bubble -->
+    <div id="cosmo-container">
+        <img src="character.png" alt="Cosmo the Astronaut" id="cosmo-character">
+        <div id="speech-bubble">
+            <p id="speech-text">Welcome to Level 2, astronaut! Time to type some commands!</p>
+        </div>
+    </div>
+    <div id="navigation-buttons">
+        <button id="menuButton">Back to Menu</button>
+        <button id="level1Button">Go to Level 1</button>
+    </div>
+    <div id="syntax-box">
+        <h3>How to Guide Cosmo (<span class="tooltip">syntax<span class="tooltip-text">Syntax means the rules for commands to make things happen!</span></span>)</h3>
+        <ul>
+            <li><span class="command-example">forward</span> - Moves Cosmo one step forward.</li>
+            <li><span class="command-example">backward</span> - Moves Cosmo one step backward.</li>
+            <li><span class="command-example">left</span> - Rotates Cosmo to the left.</li>
+            <li><span class="command-example">right</span> - Rotates Cosmo to the right.</li>
+            <li><span class="command-example">forward(3)</span> - Moves Cosmo forward 3 steps.</li>
+        </ul>
+    </div>
+    <div class="game-container">
+        <div class="controls">
+            <textarea id="codeInput" placeholder="Enter your commands here..."></textarea>
+            <button id="startButton">Start</button>
+            <button id="runButton">Run</button>
+            <button id="anotherGoButton" style="display:none;">Another Go</button>
+            <div>
+                <p>Steps Taken: <span id="stepsLeft">0</span></p>
+            </div>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    <script src="cosmo-algorithms-level2.js"></script>
+</body>
+</html>
+
+
+
+

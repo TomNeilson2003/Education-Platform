@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jungle Pathfinder</title>
+    <link rel="stylesheet" href="jungle-logic.css">
+</head>
+<body>
+    <header>
+        <h1>Parrot Logic: Code the Rainforest</h1>
+        <p>Program the parrot to solve jungle puzzles!</p>
+    </header>
+    <main>
+      <div id="game-container">
+        <div id="variable-inputs">
+            <p id="current-level">Level: 1 / 20</p>
+            <p id="message"></p>
+            <p id="level-description"></p>
+            <p id="hint"></p>
+        </div>
+
+
+<div id="level-select-popup" class="popup-container">
+  <div class="popup-content">
+      <h2>Select Level</h2>
+      <div class="level-grid" id="level-grid"></div>
+      <button onclick="closeLevelSelect()" class="popup-close">Close</button>
+  </div>
+</div>
+
+<!-- Add a level select button next to your existing buttons -->
+<button id="level-select-button" class="game-button">Select Level</button>
+        <div id="navigation-buttons">
+          <button id="menuButton">Back to Menu</button>
+      </div>
+    
+        <div id="jungle-scene">
+            <canvas id="jungleCanvas" width="600" height="400"></canvas>
+        </div>
+
+        <div id="toolbox">
+            <h2>Code Toolbox</h2>
+            <div class="command" draggable="true" data-command="moveForward">Move Forward</div>
+            <div class="command" draggable="true" data-command="turnLeft">Turn Left</div>
+            <div class="command" draggable="true" data-command="turnRight">Turn Right</div>
+            <div class="command" draggable="true" data-command="ifPath">If Path, Move Forward</div>
+            <div class="command" draggable="true" data-command="repeat">Repeat 3 Times</div>
+        </div>
+    
+        <div id="editor">
+            <h2>Your Code</h2>
+            <ul id="command-list"></ul>
+            <button id="run-code">Run Code</button>
+            <button id="hint-button">Need a Hint?</button>
+            <button id="reset-code">Reset</button>
+            <button id="resetLevelButton">Reset Level</button>
+            <button id="nextLevelButton" style="display: none;">Next Level</button>
+        </div>
+    </div>
+
+        <div id="variables-panel">
+            <h3>Target</h3>
+            <p>X: <span id="target-x">?</span>, Y: <span id="target-y">?</span></p>
+        </div>
+
+        <div id="level-progress">
+            <p id="speech-text"></p>
+        </div>
+    </main>
+
+    <div id="popup-container" class="hidden">
+        <div id="speech-bubble">
+            <p id="speech-text"></p>
+        </div>
+    </div>
+
+    <script src="jungle-logic.js"></script>
+</body>
+</html>

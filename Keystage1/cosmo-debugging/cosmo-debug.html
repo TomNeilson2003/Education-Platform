@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cosmo-debugging.css">
+    <title>Debug Cosmo's Commands</title>
+</head>
+<body>
+    <!-- Navigation Buttons -->
+    <div id="navigation-buttons">
+        <button id="menuButton">Back to Menu</button>
+    </div>
+
+    <!-- Cosmo Character -->
+    <div id="cosmo-container">
+        <img src="character.png" alt="Cosmo the Astronaut" id="cosmo-character">
+        <div id="speech-bubble">
+            <p id="speech-text">Welcome! Help me fix my commands!</p>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <!-- Controls Section -->
+        <div class="controls">
+            <div id="syntax-box">
+                <h3>Fix Cosmo's Commands (<span class="tooltip">syntax<span class="tooltip-text">Syntax means the rules for commands to make things happen!</span></span>)</h3>
+                <ul>
+                    <li><span class="command-example">forward</span> - Move Cosmo one step forward.</li>
+                    <li><span class="command-example">backward</span> - Move Cosmo one step backward.</li>
+                    <li><span class="command-example">left</span> - Rotate Cosmo left (90 degrees).</li>
+                    <li><span class="command-example">right</span> - Rotate Cosmo right (90 degrees).</li>
+                </ul>
+            </div>
+
+            <div class="command-section">
+                <div id="commandArea">
+                    <h4>Fix the Sequence:</h4>
+                </div>
+                <div id="trashBin">
+                    <h4>🗑️ Trash Bin</h4>
+                </div>
+            </div>
+
+            <div id="availableCommands">
+                <h4>Available Commands:</h4>
+                <div class="command" draggable="true">forward</div>
+                <div class="command" draggable="true">backward</div>
+                <div class="command" draggable="true">left</div>
+                <div class="command" draggable="true">right</div>
+            </div>
+
+            <button id="startButton">Start</button>
+            <button id="runButton">Run</button>
+            <button id="nextLevelButton" style="display: none;">Next Level</button>
+            <button id="resetGameButton">Reset to Level 1</button>
+
+        </div>
+        <div id="progressDisplay" style="color: white; font-size: 18px; text-align: center; margin-bottom: 10px;"></div>
+        <!-- Canvas -->
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <script src="cosmo-debugging.js"></script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teacher Dashboard - Educational Portal</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" 
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+/* Advanced Teacher Dashboard Styles (with button fix) */
+.dashboard-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  width: 95%;
+}
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #007bff;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+.dashboard-section {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.section-title {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+.classes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+.class-card {
+  background: #f5f7fa;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: relative; /* Keep this for potential absolute positioning of other elements */
+  transition: transform 0.3s;
+  cursor: pointer;
+  display: flex; /* Make class-card a flex container */
+  flex-direction: column; /* Stack content vertically */
+  justify-content: space-between; /* Push buttons to the bottom */
+  min-height: 150px; /* Ensure enough height for content and buttons */
+}
+.class-card:hover {
+  transform: translateY(-5px);
+}
+.class-card h4 {
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+.class-card p {
+  margin: 5px 0;
+  color: #666;
+}
+.class-card button { /* Style for both buttons */
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-size: 14px;
+}
+.view-students-btn {
+  background: #4CAF50;
+}
+.set-games-btn {
+  background: #007bff;
+}
+.button-container { /* New container for buttons */
+  display: flex;
+  gap: 10px; /* Space between buttons */
+  margin-top: 10px; /* Space above buttons */
+}
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+  position: relative;
+}
+.close-button {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close-button:hover {
+  color: black;
+}
+.students-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.students-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.students-list li:last-child {
+  border-bottom: none;
+}
+.view-progress-btn {
+  background: #2196F3;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* New Modal for setting games (student selection) */
+#setGamesModal {
+  display: none;
+  position: fixed;
+  z-index: 150;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+#setGamesModal .modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 8px;
+  position: relative;
+}
+#setGamesModal .close-button {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+#setGamesModal .close-button:hover {
+  color: black;
+}
+#setGamesModal h2 {
+  margin-bottom: 15px;
+}
+#studentCheckboxList {
+  list-style: none;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+#studentCheckboxList li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+#studentCheckboxList li label {
+  margin-left: 8px;
+  flex: 1;
+}
+#selectAllBtn, #setGameNextBtn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+#selectAllBtn:hover, #setGameNextBtn:hover {
+  background: #0056b3;
+}
+
+/* Modal for game selection */
+#gameSelectionModal {
+  display: none;
+  position: fixed;
+  z-index: 200;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+#gameSelectionModal .modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  position: relative;
+  text-align: center;
+}
+#gameSelectionModal h2 {
+  margin-bottom: 15px;
+}
+.game-option {
+  background: #8e44ad;
+  color: white;
+  padding: 10px 15px;
+  margin: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.game-option:hover {
+  transform: scale(1.05);
+}
+  </style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1>Teacher Dashboard</h1>
+      <button id="logoutButton" class="button logout-button"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </header>
+
+    <section class="dashboard-section welcome-section">
+      <h2 class="section-title">Welcome, <span id="teacherName"></span>!</h2>
+      <p>Manage your classes and view student progress.</p>
+    </section>
+
+    <section class="dashboard-section create-class-section">
+      <h3 class="section-title">Create a New Class</h3>
+      <form id="createClassForm" class="class-form">
+        <div class="form-group">
+          <label for="className">Class Name:</label>
+          <input type="text" id="className" name="className" required placeholder="e.g., Year 7 Maths">
+        </div>
+        <button type="submit" class="button primary-button">Create Class</button>
+      </form>
+      <div id="classCodeDisplay" class="class-code-display"></div>
+    </section>
+
+    <section class="dashboard-section active-classes-section">
+      <h3 class="section-title">Your Active Classes</h3>
+      <div id="activeClasses" class="classes-grid">
+        <!-- Class cards will be loaded here -->
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal to display student list and set game -->
+  <div id="setGamesModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="closeSetGamesModal">&times;</span>
+      <h2>Set Game for <span id="setModalClassName"></span> (<span id="setModalClassCode"></span>)</h2>
+      <button id="selectAllBtn">Select All</button>
+      <ul id="studentCheckboxList"></ul>
+      <button id="setGameNextBtn">Next</button>
+    </div>
+  </div>
+
+  <!-- Modal for selecting a game -->
+  <div id="gameSelectionModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="closeGameSelectionModal">&times;</span>
+      <h2>Select a Game</h2>
+      <div id="gameOptions">
+        <!-- Example game options. Adjust or load dynamically as needed -->
+        <div class="game-option" data-game="cosmo-level1">Cosmo Algorithm Level 1</div>
+        <div class="game-option" data-game="cosmo-level2">Cosmo Algorithm Level 2</div>
+        <div class="game-option" data-game="cosmo-debugging">Cosmo Debugging Game</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Existing modals for student list and progress -->
+  <div id="studentListModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="closeModalButton">&times;</span>
+      <h2>Student List for <span id="modalClassName"></span> (<span id="modalClassCode"></span>)</h2>
+      <ul id="studentNamesList" class="students-list"></ul>
+    </div>
+  </div>
+
+  <div id="progressModal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" id="closeProgressModal">&times;</span>
+      <h2>Student Progress</h2>
+      <div class="progress-content"></div>
+    </div>
+  </div>
+
+  <script src="js/teacher-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="cosmo-algorithms.css">
+    <title>Cosmo's Algorithm Adventure</title>
+</head>
+<body>
+    <div id="difficulty-selection">
+        <h2>Select Difficulty Level</h2>
+        <button id="level1Button">Level 1: Drag and Drop</button>
+        <button id="level2Button">Level 2: Type Commands</button>
+    </div>
+
+    <div class="game-container hidden">
+        <div class="controls">
+            <div class="syntax hidden">
+                <h3>Command Syntax</h3>
+                <p>Use the following commands to navigate Cosmo:</p>
+                <ul>
+                    <li><code>forward</code> - Move the rocket forward</li>
+                    <li><code>backward</code> - Move the rocket backward</li>
+                    <li><code>left</code> - Rotate the rocket left (90 degrees)</li>
+                    <li><code>right</code> - Rotate the rocket right (90 degrees)</li>
+                </ul>
+            </div>
+            <div id="dragCommands">
+                <p>Drag and drop commands here:</p>
+                <div id="commandArea"></div>
+                <div id="availableCommands">
+                    <p>Available Commands:</p>
+                    <div class="command" draggable="true">forward</div>
+                    <div class="command" draggable="true">backward</div>
+                    <div class="command" draggable="true">left</div>
+                    <div class="command" draggable="true">right</div>
+                </div>
+            </div>
+            
+            <textarea id="codeInput" placeholder="Enter your commands here..." class="hidden"></textarea>
+            <button id="startButton" class="hidden">Start</button>
+            <button id="runButton" class="hidden">Run</button>
+            <button id="anotherGoButton" style="display:none;">Another Go</button>
+            <button id="returnButton" class="hidden">Return to Level Selection</button>
+            <div>
+                <p>Steps: <span id="stepsLeft">0</span></p>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Popup Container -->
+    <div id="popup-container" class="hidden">
+        <div id="character">
+            <img src="character.png" alt="Guide Character">
+        </div>
+        <div id="speech-bubble">
+            <p id="speech-text"></p>
+        </div>
+    </div>
+
+    <script src="cosmo-algorithms.js"></script>
+</body>
+</html>
+
+
+
+
+

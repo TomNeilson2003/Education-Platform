@@ -1,0 +1,97 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #d9f9ff, #a1dfff);
+    text-align: center;
+    color: #333;
+}
+
+header {
+    background-color: #007acc;
+    color: white;
+    padding: 20px;
+    position: relative;
+}
+
+#scoreboard {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 18px;
+}
+
+main {
+    padding: 20px;
+}
+
+.game-level {
+    border: 2px solid #007acc;
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 600px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 16px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #005f99;
+}
+
+#character img {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#guide-message {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #444;
+}
+
+/* Smoother Animations */
+@keyframes conveyor {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+#conveyor {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.choice {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #007acc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: conveyor 5s linear infinite;
+}
+
+.choice:hover {
+    background-color: #005f99;
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+

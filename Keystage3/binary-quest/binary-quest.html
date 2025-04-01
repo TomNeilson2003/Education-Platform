@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Quest</title>
+    <link rel="stylesheet" href="binary-quest.css">
+</head>
+<body>
+    <header>
+        <h1>Binary Quest</h1>
+        <p id="storyline">Your mission: Save the digital world from a virus! Join your guide, Byte, and embark on this adventure.</p>
+        <div id="scoreboard">Score: <span id="score">0</span></div>
+    </header>
+
+    <main>
+        <!-- Character and Guide -->
+        <div id="character">
+            <img src="character-guide.png" alt="Byte the Guide">
+            <p id="guide-message">Welcome to Binary Quest! Let’s start your adventure.</p>
+        </div>
+
+        <!-- Level 1: Binary Basics -->
+        <div id="level1" class="game-level">
+            <h2>Level 1: Binary Basics</h2>
+            <p>Convert the binary number to decimal:</p>
+            <div id="binary-question"></div>
+            <div id="choices-container"></div>
+            <p id="level1-message"></p>
+            <p id="attempts-message"></p>
+        </div>
+
+        <!-- Level 2: Binary Addition -->
+        <div id="level2" class="game-level" style="display: none;">
+            <h2>Level 2: Binary Addition</h2>
+            <p>Add the two binary numbers:</p>
+            <div id="binary-addition"></div>
+            <input type="number" id="addition-input" placeholder="Enter Sum">
+            <button id="submit-addition">Submit</button>
+            <p id="level2-message"></p>
+        </div>
+
+        <!-- Completion Screen -->
+        <div id="completion" style="display: none;">
+            <h2>Congratulations!</h2>
+            <p>You’ve completed Binary Quest. Great job!</p>
+            <button id="restart-btn">Play Again</button>
+        </div>
+    </main>
+
+    <script src="binary-quest.js"></script>
+</body>
+</html>
+
+
+

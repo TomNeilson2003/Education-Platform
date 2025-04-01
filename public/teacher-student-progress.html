@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Game Progress - Teacher View</title>
+    <link rel="stylesheet" href="css/styles.css"> <!- - Or your general styles - ->
+    <link rel="stylesheet" href="teacher-progress.css"> <!- - Teacher Progress specific styles - ->
+</head>
+<body>
+    <header class="dashboard-header">
+        <div class="header-content">
+            <h1>Student Game Progress</h1>
+            <nav>
+                <button onclick="window.history.back()" class="button"><i class="fas fa-arrow-left"></i> Back</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <section class="dashboard-section welcome-section">
+            <h2>Progress for Student: <span id="studentNameDisplay"></span> (<span id="studentUsernameDisplay"></span>)</h2>
+        </section>
+
+        <section class="dashboard-section progress-details-section">
+            <div id="progressDetailsContainer">
+                <!- - Detailed progress for each game will be displayed here - ->
+            </div>
+        </section>
+    </main>
+
+    <script src="js/teacher-student-progress.js"></script> <!- - JS for this page - ->
+</body>
+</html>

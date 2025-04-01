@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Net Navigator Junior</title>
+    <link rel="stylesheet" href="net-navigator-junior.css">
+</head>
+
+<div class="completion-content">
+
+    <div class="button-group">
+        <button class="game-button" onclick="startOver()">Play Again</button>
+        <a href="../KS2-SG.html" class="game-button">Back to Menu</a>
+    </div>
+</div>
+<body>
+    <header>
+        <h1>Net Navigator Junior</h1>
+        <p>Connect the devices to build a network!</p>
+    </header>
+    <main>
+        <div id="game-and-info-container">
+            <div id="game-container">
+                <div id="network-devices">
+                    <h2>Devices</h2>
+                    <div class="device" draggable="true" data-device="computer">Computer</div>
+                    <div class="device" draggable="true" data-device="tablet">Tablet</div>
+                    <div class="device" draggable="true" data-device="router">Router</div>
+                    <div class="device" draggable="true" data-device="printer">Printer</div>
+                    <div class="device" draggable="true" data-device="smartTV">Smart TV</div>
+                    <div class="device" draggable="true" data-device="switch">Switch</div>
+                    <div class="device" draggable="true" data-device="server">Server</div>
+                    <div class="device" draggable="true" data-device="wap">Wireless AP</div>
+                    <div class="device" draggable="true" data-device="keyboard">Keyboard</div>
+                    <div class="device" draggable="true" data-device="mouse">Mouse</div>
+                    <div class="device" draggable="true" data-device="cloud">Internet</div>
+                </div>
+                <div id="network-area">
+                    <h2>Network Area</h2>
+                    <canvas id="networkCanvas" width="400" height="400"></canvas>
+                </div>
+            </div>
+            <div id="info-box">
+                <h2>Information</h2>
+                <div id="message"></div>
+            </div>
+        </div>
+    </main>
+    
+
+    <!-- Popup Container -->
+    <div id="popup-container" class="hidden">
+        <div id="character">
+            <img src="character.png" alt="Guide Character">
+        </div>
+        <div id="speech-bubble">
+            <p id="speech-text"></p>
+        </div>
+    </div>
+
+    <script src="net-navigator-junior.js"></script>
+</body>
+</html>
+
+

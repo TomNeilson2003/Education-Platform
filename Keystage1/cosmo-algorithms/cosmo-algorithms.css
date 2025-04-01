@@ -1,0 +1,336 @@
+body {
+    background: linear-gradient(to bottom, #000428, #004e92);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.game-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#gameCanvas {
+    background-color: black;
+    border: 2px solid white;
+    margin-left: 20px;
+}
+
+.controls {
+    margin-top: 10px;
+    margin-right: 20px;
+    text-align: center;
+    color: #ffffff; /* Set text color to white for better visibility */
+}
+
+textarea {
+    width: 500px;
+    height: 250px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+}
+
+/* Enhanced Textbox Style */
+#codeInput {
+    width: 90%; /* Takes up most of the width */
+    max-width: 600px; /* Caps the maximum width */
+    height: 150px; /* Provides enough height for multi-line input */
+    margin: 20px auto; /* Centers the box horizontally */
+    display: block; /* Ensures it's centered */
+    padding: 15px; /* Adds padding for better text visibility */
+    font-size: 16px; /* Increases text readability */
+    font-family: 'Comic Sans MS', sans-serif; /* Child-friendly font */
+    color: #333; /* Dark text for readability */
+    background: linear-gradient(to bottom, #ffffff, #f0f8ff); /* Soft gradient background */
+    border: 2px solid transparent; /* No default border */
+    border-radius: 12px; /* Rounded edges */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adds subtle shadow */
+    outline: none; /* Removes default outline */
+    transition: border 0.3s ease, box-shadow 0.3s ease; /* Smooth hover and focus animations */
+}
+
+/* Hover Effect for Textbox */
+#codeInput:hover {
+    border: 2px solid #72c2ff; /* Adds a blue border */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhances shadow on hover */
+}
+
+/* Focus Effect for Textbox */
+#codeInput:focus {
+    border: 2px solid #1f8efd; /* Bright blue border */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* More prominent shadow */
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    width: 200px; /* Adjust the width for bigger buttons */
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+
+/* Drag-and-Drop Commands (Level 1) */
+#availableCommands {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+}
+
+#availableCommands .command {
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 4px;
+    cursor: grab;
+    margin: 5px 0;
+    text-align: center;
+}
+
+#availableCommands .command:active {
+    cursor: grabbing;
+}
+
+#commandArea {
+    margin-top: 20px;
+    padding: 10px;
+    border: 2px dashed #3498db;
+    min-height: 100px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+.command {
+    background-color: #3498db;
+    color: white;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: grab;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#commandArea .command:hover {
+    background-color: #27ae60;
+}
+
+.command:active {
+    cursor: grabbing;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#cosmo-container {
+    position: absolute;
+    bottom: 5%; /* Adjust to move closer or farther from the bottom */
+    left: 5%; /* Adjust for horizontal positioning */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 300px; /* Scale the character container */
+    height: auto;
+}
+
+#cosmo-character {
+    width: 250px; /* Scale down the character */
+    height: auto;
+}
+
+#speech-bubble {
+    position: absolute;
+    bottom: 110%; /* Place above the character */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    width: 250px; /* Fixed width */
+    height: 100px; /* Fixed height */
+    font-family: 'Comic Sans MS', sans-serif;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Prevent text overflow */
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+#speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* Arrow position */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: white transparent transparent transparent; /* Arrow color matches bubble */
+}
+
+#speech-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: black;
+    word-wrap: break-word;
+}
+
+#navigation-buttons {
+    position: absolute;
+    top: 10px; /* Distance from the top */
+    left: 10px; /* Distance from the left */
+    display: flex;
+    gap: 10px; /* Space between the buttons */
+}
+
+#navigation-buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#navigation-buttons button:hover {
+    background-color: #2980b9;
+}
+
+/* Syntax Box */
+#syntax-box {
+    margin-bottom: 600px; /* Small margin below the syntax box */
+    background: linear-gradient(135deg, #72c2ff, #1f8efd); /* Harmonizing blue gradient */
+    color: #fff; /* White text for contrast */
+    border: 2px solid #007bff; /* Blue border matching the commands */
+    border-radius: 12px;
+    padding: 15px;
+    width: 90%; /* Match the width of the drag-and-drop section */
+    max-width: 600px; /* Limit max width for better alignment */
+    text-align: left;
+    font-family: 'Comic Sans MS', sans-serif;
+    font-size: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto; /* Center horizontally */
+    position: relative; /* Allow tooltip positioning */
+}
+
+/* Syntax Box Header */
+#syntax-box h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ffdd59; /* Warm yellow accent */
+    text-align: center;
+}
+
+/* Syntax Box List */
+#syntax-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#syntax-box li {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #fff; /* White text for contrast */
+}
+
+.command-example {
+    font-weight: bold;
+    color: #ffdd59; /* Match yellow accent */
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Tooltip for syntax */
+.tooltip {
+    position: relative;
+    text-decoration: underline dashed;
+    cursor: help;
+    color: #ffdd59; /* Match yellow accent */
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    background-color: #fff; /* White background for contrast */
+    color: #333; /* Dark text for readability */
+    text-align: center;
+    font-size: 12px;
+    font-family: 'Comic Sans MS', sans-serif;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 5px;
+    position: absolute;
+    top: 110%; /* Position below the tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px; /* Tooltip width for readability */
+    z-index: 1;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Talking animation */
+#cosmo-character.talking {
+    animation: talking 0.3s infinite;
+}
+
+@keyframes talking {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Adventure</title>
+    <link rel="stylesheet" href="algorithm-adventure.css">
+</head>
+<body>
+    <header>
+        <h1>Algorithm Adventure</h1>
+        <p>Embark on a quest to master algorithms and computational thinking!</p>
+    </header>
+    <main id="game-container">
+        <div id="score">Score: 0</div> <!-- Score display added -->
+        <div id="sidebar">
+            <h2>Levels</h2>
+            <ul id="level-list">
+                <li data-level="1">Sorting Algorithms</li>
+                <li data-level="2">Searching Algorithms</li>
+                <li data-level="3">Boolean Logic Puzzles</li>
+                <li data-level="4">Data Structures</li>
+            </ul>
+        </div>
+        <div id="game-area">
+            <canvas id="gameCanvas" width="800" height="600"></canvas>
+        </div>
+        <div id="info-box">
+            <h2>Instructions</h2>
+            <p id="instructions">Select a level to begin your adventure!</p>
+        </div>
+    </main>
+    <script src="algorithm-adventure.js"></script>
+</body>
+</html>
+
