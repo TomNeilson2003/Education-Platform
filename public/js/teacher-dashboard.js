@@ -195,11 +195,58 @@ function openStudentListModal(className, classCode, students) {
 
 
 
+// Replace the entire showProgressModal function with this corrected version
 function showProgressModal(progressData) {
   const modal = document.getElementById('progressModal');
   const ks2Games = ['parrot-adventure', 'password-adventure', 'netnav-junior'];
   
   const html = progressData.map(progress => {
+    // Handle Algorithm Adventure (KS3)
+    if (progress.gameName === 'algorithm-adventure') {
+      return `
+        <div class="progress-item">
+          <h4>Algorithm Adventure</h4>
+          <div class="progress-metrics">
+            <div class="metric">
+              <span class="label">Levels Completed:</span>
+              <span class="value">${progress.level}/5</span>
+            </div>
+            <div class="metric">
+              <span class="label">Total Score:</span>
+              <span class="value">${progress.stepsTaken}</span>
+            </div>
+            <div class="metric">
+              <span class="label">Attempts:</span>
+              <span class="value">${progress.attempts}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Handle Binary Quest (KS3)
+    if (progress.gameName === 'binary-quest') {
+      return `
+        <div class="progress-item">
+          <h4>Binary Quest</h4>
+          <div class="progress-metrics">
+            <div class="metric">
+              <span class="label">Cumulative Score:</span>
+              <span class="value">${progress.stepsTaken}</span>
+            </div>
+            <div class="metric">
+              <span class="label">Attempts:</span>
+              <span class="value">${progress.attempts}</span>
+            </div>
+            <div class="metric">
+              <span class="label">Last Played:</span>
+              <span class="value">${new Date(progress.lastPlayed).toLocaleDateString()}</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     // Handle KS2 Games
     if (ks2Games.includes(progress.gameName)) {
       const maxLevels = {
@@ -233,8 +280,9 @@ function showProgressModal(progressData) {
         </div>
       `;
     }
+
     // Handle KS1 Debugging Game
-    else if (progress.gameName === 'cosmo-debugging') {
+    if (progress.gameName === 'cosmo-debugging') {
       const levelsCompleted = progress.level ? progress.level - 1 : 0;
       return `
         <div class="progress-item">
@@ -260,32 +308,31 @@ function showProgressModal(progressData) {
         </div>
       `;
     }
-    // Handle other KS1 Games
-    else {
-      return `
-        <div class="progress-item">
-          <h4>${progress.gameName.replace('cosmo-', '').toUpperCase()}</h4>
-          <div class="progress-metrics">
-            <div class="metric">
-              <span class="label">Attempts:</span>
-              <span class="value">${progress.attempts || 0}</span>
-            </div>
-            <div class="metric">
-              <span class="label">Completed:</span>
-              <span class="value">${progress.completed ? 'Yes' : 'No'}</span>
-            </div>
-            <div class="metric">
-              <span class="label">Best Steps:</span>
-              <span class="value">${progress.bestSteps || 'N/A'}</span>
-            </div>
-            <div class="metric">
-              <span class="label">Last Played:</span>
-              <span class="value">${new Date(progress.lastPlayed).toLocaleDateString()}</span>
-            </div>
+
+    // Default case for other games
+    return `
+      <div class="progress-item">
+        <h4>${progress.gameName.replace('cosmo-', '').toUpperCase()}</h4>
+        <div class="progress-metrics">
+          <div class="metric">
+            <span class="label">Attempts:</span>
+            <span class="value">${progress.attempts || 0}</span>
+          </div>
+          <div class="metric">
+            <span class="label">Completed:</span>
+            <span class="value">${progress.completed ? 'Yes' : 'No'}</span>
+          </div>
+          <div class="metric">
+            <span class="label">Best Steps:</span>
+            <span class="value">${progress.bestSteps || 'N/A'}</span>
+          </div>
+          <div class="metric">
+            <span class="label">Last Played:</span>
+            <span class="value">${new Date(progress.lastPlayed).toLocaleDateString()}</span>
           </div>
         </div>
-      `;
-    }
+      </div>
+    `;
   }).join('');
 
   modal.querySelector('.progress-content').innerHTML = html;
@@ -355,14 +402,16 @@ function openGameSelectionModal(studentIds) {
 
   // Remove previous listeners by cloning nodes.
   gameOptionsContainer.innerHTML = `
-    <div class="game-option" data-game="cosmo-level1">Cosmo Algorithm Level 1</div>
-    <div class="game-option" data-game="cosmo-level2">Cosmo Algorithm Level 2</div>
-    <div class="game-option" data-game="cosmo-debugging">Cosmo Debugging Game</div>
-    <div class="game-option" data-game="parrot">Parrot Adventure</div>
-    <div class="game-option" data-game="password">Password Adventure</div>
-    <div class="game-option" data-game="netnav">Net Navigator Junior</div>
-  `; // Re-populate to remove old listeners cleanly
+    <div class="game-option" data-game="cosmo-level1">Cosmo Algorithm Level 1 (KS1)</div>
+    <div class="game-option" data-game="cosmo-level2">Cosmo Algorithm Level 2 (KS1)</div>
+    <div class="game-option" data-game="cosmo-debugging">Debugging Game (KS1)</div>
+    <div class="game-option" data-game="parrot-adventure">Parrot Adventure (KS2)</div>
+    <div class="game-option" data-game="password-adventure">Password Adventure (KS2)</div>
+    <div class="game-option" data-game="netnav-junior">Net Navigator (KS2)</div>
+    <div class="game-option" data-game="algorithm-adventure">Algorithm Adventure (KS3)</div>
+    <div class="game-option" data-game="binary-quest">Binary Quest (KS3)</div>
 
+  `; 
   document.querySelectorAll('.game-option').forEach(option => {
     option.addEventListener('click', async () => {
       const gameName = option.getAttribute('data-game');

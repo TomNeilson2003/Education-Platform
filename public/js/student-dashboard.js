@@ -114,6 +114,30 @@ async function loadStudentProgress(studentId) {
     }
 
     progressContainer.innerHTML = progressData.map(progress => {
+      // Handle Algorithm Adventure (KS3)
+      if (progress.gameName === 'algorithm-adventure') {
+        return `
+          <div class="progress-card">
+            <h4>Algorithm Adventure</h4>
+            <p>Level: ${progress.level}/5</p>
+            <p>Total Score: ${progress.stepsTaken}</p>
+            <p>Last Played: ${new Date(progress.lastPlayed).toLocaleDateString()}</p>
+          </div>
+        `;
+      }
+      
+      // Handle Binary Quest (KS3)
+      if (progress.gameName === 'binary-quest') {
+        return `
+          <div class="progress-card">
+            <h4>Binary Quest</h4>
+            <p>Cumulative Score: ${progress.stepsTaken}</p>
+            <p>Attempts: ${progress.attempts}</p>
+            <p>Last Played: ${new Date(progress.lastPlayed).toLocaleDateString()}</p>
+          </div>
+        `;
+      }
+
       // Handle KS2 Games
       const ks2Games = ['parrot-adventure', 'password-adventure', 'netnav-junior'];
       if (ks2Games.includes(progress.gameName)) {
@@ -150,8 +174,9 @@ async function loadStudentProgress(studentId) {
           </div>
         `;
       }
+
       // Handle KS1 Debugging Game
-      else if (progress.gameName === 'cosmo-debugging') {
+      if (progress.gameName === 'cosmo-debugging') {
         const levelsCompleted = progress.level ? progress.level - 1 : 0;
         return `
           <div class="progress-card">
@@ -164,16 +189,15 @@ async function loadStudentProgress(studentId) {
         `;
       }
 
-      else {
-        return `
-          <div class="progress-card">
-            <h4>${progress.gameName.replace('cosmo-', '').toUpperCase()}</h4>
-            <p>Status: ${progress.completed ? 'Completed' : 'In Progress'}</p>
-            <p>Best Score: ${progress.bestSteps || 'N/A'}</p>
-            <p>Last Played: ${new Date(progress.lastPlayed).toLocaleDateString()}</p>
-          </div>
-        `;
-      }
+      // Default case for other games
+      return `
+        <div class="progress-card">
+          <h4>${progress.gameName.replace('cosmo-', '').toUpperCase()}</h4>
+          <p>Status: ${progress.completed ? 'Completed' : 'In Progress'}</p>
+          <p>Best Score: ${progress.bestSteps || 'N/A'}</p>
+          <p>Last Played: ${new Date(progress.lastPlayed).toLocaleDateString()}</p>
+        </div>
+      `;
     }).join('');
   } catch (error) {
     console.error('Error loading progress:', error);

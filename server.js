@@ -1,4 +1,5 @@
 const express = require('express');
+const crypto = require('crypto')
 // const bcrypt = require('bcrypt'); // bcrypt is ignored for now
 const { Sequelize, DataTypes } = require('sequelize');
 const cors = require('cors');
@@ -14,17 +15,8 @@ app.use(express.static('Keystage2'));
 app.use(express.static('Keystage3'));
 app.use(express.static('Keystage4'));
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
-  protocol: 'postgres',
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false, // This allows self-signed certs
-    }
-  }
-});
-
+// Database Connection (PostgreSQL) - Keeping PostgreSQL as in original code, adjust if needed
+const sequelize = new Sequelize(process.env.DATABASE_URL);
 
 const session = require('express-session'); // Add this at the top with other requires
 
@@ -47,7 +39,7 @@ const Teacher = sequelize.define('Teacher', {
         autoIncrement: true,
     },
     username: { type: DataTypes.STRING, unique: true },
-    password: DataTypes.STRING,
+    password: DataTypes.STRING(1024),
     name: DataTypes.STRING // Teacher's full name
 });
 
@@ -123,14 +115,17 @@ Class.belongsToMany(Student, { through: StudentClass }); // Class can have many 
 
 Student.hasMany(Progress, { foreignKey: 'studentId' });
 Progress.belongsTo(Student, { foreignKey: 'studentId' }); // Added relationship for Progress -> Student
-
+function hashPassword(password) {
+    return crypto.createHash('sha256').update(password).digest('hex');
+  }
+  
 
 async function createTestData() {
     const existingTeacher = await Teacher.findOne({ where: { username: 'testteacher' } });
     if (!existingTeacher) {
         const teacher = await Teacher.create({
             username: 'testteacher',
-            password: 'password123', // bcrypt ignored - storing plain text password for now
+            password: hashPassword('password123'),
             name: 'Ms. Smith'
         });
 
@@ -190,9 +185,9 @@ app.post('/api/teachers', async (req, res) => {
             return res.status(400).json({ error: 'Username already exists' });
         }
 
-        // Hash password - bcrypt ignored, storing plain text password
-        const hashedPassword = password; // Plain text password - INSECURE!
-        // const hashedPassword = await bcrypt.hash(password, 10); // Original bcrypt line
+        // Hashed passowrd
+        const hashedPassword = hashPassword(password);
+     
 
         // Create teacher
         const newTeacher = await Teacher.create({
@@ -232,9 +227,8 @@ app.post('/api/login', async (req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // Password comparison - bcrypt ignored, direct plain text comparison
-        const passwordMatch = (password === teacher.password); // Direct plain text comparison - INSECURE!
-        // const passwordMatch = await bcrypt.compare(password, teacher.password); // Original bcrypt line
+       
+        const passwordMatch = (hashPassword(password) === teacher.password);
 
         if (passwordMatch) {
             console.log(`Password match successful for username: ${username}, teacherId: ${teacher.id}`); // Log successful login
@@ -941,8 +935,82 @@ app.get('/api/progress/password/:studentId', async (req, res) => {
     }
 });
 
-
+app.post('/api/game/record-algo-progress-ks3', async (req, res) => {
+    try {
+    const { studentId, level, score } = req.body;
+    const [progress, created] = await Progress.findOrCreate({
+        where: { studentId, gameName: 'algorithm-adventure', keystage: 'Keystage3' },
+        defaults: { level, stepsTaken: score, completed: level === 5, attempts: 1, lastPlayed: new Date() }
+    });
   
+    if (!created) {
+        if (level > progress.level) progress.level = level;
+        if (score > progress.stepsTaken) progress.stepsTaken = score;
+        progress.completed ||= (level === 5);
+        progress.attempts += 1;
+        progress.lastPlayed = new Date();
+        await progress.save();
+    }
+    res.json(progress);
+    } catch (error) {
+    res.status(500).json({ error: "Failed to record progress" });
+    }
+});
+
+  app.get('/api/progress/algo/:studentId', async (req, res) => {
+    try {
+      const progress = await Progress.findOne({
+        where: {
+          studentId: req.params.studentId,
+          gameName: 'algorithm-adventure',
+          keystage: 'Keystage3'
+        }
+      });
+      res.json(progress || { level: 0, stepsTaken: 0, attempts: 0 });
+    } catch (error) {
+      console.error("Error fetching algorithm adventure progress:", error);
+      res.status(500).json({ error: "Failed to fetch progress" });
+    }
+  });
+
+// Binary Quest route
+app.post('/api/game/record-binary-progress-ks3', async (req, res) => {
+    try {
+    const { studentId, score } = req.body;
+    const [progress, created] = await Progress.findOrCreate({
+        where: { studentId, gameName: 'binary-quest', keystage: 'Keystage3' },
+        defaults: { stepsTaken: score, attempts: 1, lastPlayed: new Date() }
+    });
+  
+    if (!created) {
+        if (score > progress.stepsTaken) progress.stepsTaken = score;
+        progress.attempts += 1;
+        progress.lastPlayed = new Date();
+        await progress.save();
+    }
+    res.json(progress);
+    }catch (error) {
+    res.status(500).json({ error: "Failed to record progress" });
+    }
+});
+
+  app.get('/api/progress/binary/:studentId', async (req, res) => {
+    try {
+      const progress = await Progress.findOne({
+        where: {
+          studentId: req.params.studentId,
+          gameName: 'binary-quest',
+          keystage: 'Keystage3'
+        }
+      });
+      res.json(progress || { stepsTaken: 0, attempts: 0 });
+    } catch (error) {
+      console.error("Error fetching binary quest progress:", error);
+      res.status(500).json({ error: "Failed to fetch progress" });
+    }
+  });
+  
+
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);

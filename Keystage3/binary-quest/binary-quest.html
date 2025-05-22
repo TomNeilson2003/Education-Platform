@@ -1,56 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binary Quest</title>
-    <link rel="stylesheet" href="binary-quest.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Binary Quest</title>
+  <link rel="stylesheet" href="binary-quest.css">
 </head>
 <body>
-    <header>
-        <h1>Binary Quest</h1>
-        <p id="storyline">Your mission: Save the digital world from a virus! Join your guide, Byte, and embark on this adventure.</p>
-        <div id="scoreboard">Score: <span id="score">0</span></div>
-    </header>
+  <header>
+    <h1>Binary Quest</h1>
+    <p id="storyline">Your mission: Save the digital world from a virus! Join your guide, Byte, and embark on this adventure.</p>
+    <div id="scoreboard">Score: <span id="score">0</span></div>
+  </header>
 
-    <main>
-        <!-- Character and Guide -->
-        <div id="character">
-            <img src="character-guide.png" alt="Byte the Guide">
-            <p id="guide-message">Welcome to Binary Quest! Let’s start your adventure.</p>
-        </div>
+  <main>
+    <!-- Character and Guide -->
+    <div id="character">
+      <img src="character-guide.png" alt="Byte the Guide">
+      <p id="guide-message">Welcome to Binary Quest! Let’s start your adventure.</p>
+    </div>
 
-        <!-- Level 1: Binary Basics -->
-        <div id="level1" class="game-level">
-            <h2>Level 1: Binary Basics</h2>
-            <p>Convert the binary number to decimal:</p>
-            <div id="binary-question"></div>
-            <div id="choices-container"></div>
-            <p id="level1-message"></p>
-            <p id="attempts-message"></p>
-        </div>
+    <!-- Level 1: Binary Basics -->
+    <div id="level1" class="game-level">
+      <h2>Level 1: Binary Basics</h2>
+      <p>Convert the binary number to decimal:</p>
+      <div id="binary-question"></div>
+      <div id="choices-container"></div>
+      <p id="level1-message"></p>
+      <p id="attempts-message"></p>
+    </div>
 
-        <!-- Level 2: Binary Addition -->
-        <div id="level2" class="game-level" style="display: none;">
-            <h2>Level 2: Binary Addition</h2>
-            <p>Add the two binary numbers:</p>
-            <div id="binary-addition"></div>
-            <input type="number" id="addition-input" placeholder="Enter Sum">
-            <button id="submit-addition">Submit</button>
-            <p id="level2-message"></p>
-        </div>
+    <!-- Level 2: Binary Addition -->
+    <div id="level2" class="game-level" style="display: none;">
+      <h2>Level 2: Binary Addition</h2>
+      <p>Add the two binary numbers:</p>
+      <div id="binary-addition"></div>
+      <input type="number" id="addition-input" placeholder="Enter Sum">
+      <button id="submit-addition">Submit</button>
+      <p id="level2-message"></p>
+    </div>
 
-        <!-- Completion Screen -->
-        <div id="completion" style="display: none;">
-            <h2>Congratulations!</h2>
-            <p>You’ve completed Binary Quest. Great job!</p>
-            <button id="restart-btn">Play Again</button>
-        </div>
-    </main>
+    <!-- Level 3: Binary Multiplication -->
+    <div id="level3" class="game-level" style="display: none;">
+      <h2>Level 3: Binary Multiplication</h2>
+      <p>Multiply the two binary numbers:</p>
+      <div id="binary-multiplication"></div>
+      <input type="number" id="multiplication-input" placeholder="Enter Product">
+      <button id="submit-multiplication">Submit</button>
+      <p id="level3-message"></p>
+    </div>
 
-    <script src="binary-quest.js"></script>
+    <!-- Level 4: Bitwise Challenge -->
+    <div id="level4" class="game-level" style="display: none;">
+      <h2>Level 4: Bitwise Challenge</h2>
+      <p>Solve the bitwise operation:</p>
+      <div id="bitwise-question"></div>
+      <div id="bitwise-choices"></div>
+      <p id="level4-message"></p>
+    </div>
+
+    <!-- Completion Screen -->
+    <div id="completion" style="display: none;">
+      <h2>Congratulations!</h2>
+      <p>You’ve completed Binary Quest. Great job!</p>
+      <button id="restart-btn">Play Again</button>
+    </div>
+  </main>
+
+  <script src="binary-quest.js"></script>
 </body>
 </html>
-
-
-

@@ -1,5 +1,6 @@
+/* Global Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
@@ -7,44 +8,43 @@ body {
     flex-direction: column;
     align-items: center;
     color: #333;
-}
-
-header {
+  }
+  
+  header {
     background-color: #005f99;
     color: #fff;
     width: 100%;
     padding: 20px;
     text-align: center;
-}
-
-h1 {
+  }
+  
+  h1 {
     margin: 10px 0;
-}
-
-main {
+  }
+  
+  main {
     display: flex;
     flex: 1;
     width: 100%;
     max-width: 1200px;
     margin: 20px 0;
     gap: 20px;
-}
-
-#sidebar {
+  }
+  
+  #sidebar {
     flex: 1;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
-}
-
-#level-list {
+  }
+  
+  #level-list {
     list-style-type: none;
     padding: 0;
-}
-
-/* Additional hover effects and enhanced visuals */
-#level-list li {
+  }
+  
+  #level-list li {
     padding: 10px;
     margin: 5px 0;
     background-color: #e0e0e0;
@@ -52,16 +52,20 @@ main {
     cursor: pointer;
     text-align: center;
     transition: background-color 0.3s, transform 0.2s;
-}
-
-#level-list li:hover {
+  }
+  
+  #level-list li:hover {
     background-color: #005f99;
     color: #fff;
     transform: scale(1.05);
-}
-
-
-#game-area {
+  }
+  
+  #level-list li.completed {
+    background-color: #4CAF50;
+    color: #fff;
+  }
+  
+  #game-area {
     flex: 4;
     background-color: #fff;
     border: 1px solid #ddd;
@@ -70,18 +74,136 @@ main {
     justify-content: center;
     align-items: center;
     position: relative;
-}
-
-canvas {
+  }
+  
+  canvas {
     width: 100%;
     height: 100%;
-}
-
-#info-box {
+  }
+  
+  #info-box {
     flex: 1;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 20px;
-}
-
+  }
+  
+  /* Custom Select (Drop Down) */
+  .custom-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: linear-gradient(135deg, #6dd5fa, #2980b9);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .custom-select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  }
+  
+  /* Improved Buttons */
+  button.demo-button,
+  button.reset-button,
+  button,
+  .binary-submit {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #f39c12, #d35400);
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin: 5px;
+  }
+  button:hover,
+  .binary-submit:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  
+  /* Input field for Binary Level */
+  .binary-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #2980b9;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 80%;
+    text-align: center;
+  }
+  
+  /* Modal styles remain unchanged */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
+  
+  .modal-buttons button {
+    margin: 5px;
+    padding: 8px 12px;
+    border: none;
+    background-color: #005f99;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .modal-buttons button:hover {
+    background-color: #003f66;
+  }
+  
+  /* Achievement notification */
+  .achievement-notification {
+    position: fixed;
+    top: 20px;
+    right: -300px;
+    background: #ffd700;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    transition: right 0.5s ease;
+  }
+  
+  .achievement-notification.achievement-show {
+    right: 20px;
+  }
+  
+  .achievement-icon {
+    font-size: 30px;
+    margin-right: 10px;
+  }
+  
+  /* Level Details Tip */
+  .level-details {
+    font-style: italic;
+    color: #555;
+    margin-top: 10px;
+  }
+  

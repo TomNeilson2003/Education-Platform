@@ -334,3 +334,91 @@ button:hover {
         transform: translateY(-5px);
     }
 }
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    /* Stack game container items vertically and center them */
+    .game-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    /* Make the canvas fluid while maintaining a square aspect ratio */
+    #gameCanvas {
+      width: 90vw;
+      height: auto;
+      max-width: 600px; /* original canvas width */
+      margin-left: 0;
+    }
+    
+    /* Center controls and syntax box */
+    .controls,
+    #syntax-box {
+      width: 90%;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+    
+    /* Stack navigation buttons vertically and center them */
+    #navigation-buttons {
+      flex-direction: column;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    /* Add body padding for small screens */
+    body {
+      padding: 10px;
+    }
+    
+    /* Adjust button size for better touch usability */
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      width: 100%;
+      margin: 5px 0;
+    }
+    
+    /* Scale down Cosmo container and character */
+    #cosmo-container {
+      position: static;
+      margin: 20px auto;
+    }
+    
+    #cosmo-character {
+      width: 200px;
+    }
+    
+    /* Adjust speech bubble size and text for readability */
+    #speech-bubble {
+      width: 80%;
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    /* Further reduce button padding and font size on very small screens */
+    button {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+    
+    /* Adjust syntax box headers and list items */
+    #syntax-box h3 {
+      font-size: 16px;
+    }
+    
+    #syntax-box li {
+      font-size: 14px;
+    }
+    
+    /* Make command elements smaller for easier display */
+    .command {
+      padding: 8px 10px;
+      font-size: 14px;
+    }
+  }
+  
