@@ -15,8 +15,17 @@ app.use(express.static('Keystage2'));
 app.use(express.static('Keystage3'));
 app.use(express.static('Keystage4'));
 
-// Database Connection (PostgreSQL) - Keeping PostgreSQL as in original code, adjust if needed
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+});
+
 
 const session = require('express-session'); // Add this at the top with other requires
 
